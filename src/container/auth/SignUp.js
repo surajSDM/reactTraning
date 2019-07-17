@@ -26,7 +26,7 @@ const styles = () => ({
     alignItems: 'center',
   },
   avatar: {
-    margin:1,
+    margin: 1,
     backgroundColor: "#f50057",
   },
   form: {
@@ -39,14 +39,24 @@ const styles = () => ({
 });
 
 
- class SignUp extends Component {
-  
-  componentDidMount(){
-    
+class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      rePassword: "",
+      checkBox: ""
+    }
+  }
+  componentDidMount() {
+
   }
   render() {
     const { classes } = this.props;
-
+    let { email, firstName, lastName, password, rePassword, checkBox } = this.state;
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -69,6 +79,8 @@ const styles = () => ({
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  value={firstName}
+                  onChange={(event) => this.setState({ firstName: event.target.value })}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -80,6 +92,8 @@ const styles = () => ({
                   label="Last Name"
                   name="lastName"
                   autoComplete="lname"
+                  value={lastName}
+                  onChange={(event) => this.setState({ lastName: event.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -91,6 +105,8 @@ const styles = () => ({
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(event) => this.setState({ email: event.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -103,11 +119,26 @@ const styles = () => ({
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  value={password}
+                  onChange={(event) => this.setState({ password: event.target.value })}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="re-password"
+                  label="Repet Password"
+                  type="password"
+                  id="password"
+                  value={rePassword}
+                  onChange={(event) => this.setState({ rePassword: event.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={<Checkbox value={"allowExtraEmails"} color="primary" onChange={(event) => this.setState({ checkBox: event.target.value })} />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
@@ -118,6 +149,7 @@ const styles = () => ({
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={(event) => { event.preventDefault(); console.log(this.state) }}
             >
               Sign Up
           </Button>

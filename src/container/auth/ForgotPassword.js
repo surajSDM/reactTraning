@@ -35,9 +35,15 @@ const styles = () => ({
 });
 
 class ForgotPassword extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            email: ""
+        }
+    }
     render() {
         let { classes } = this.props;
-
+        let { email } = this.state;
         return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -59,6 +65,8 @@ class ForgotPassword extends Component {
                             name="email"
                             autoComplete="email"
                             autoFocus
+                            value={email}
+                            onChange={(event) => this.setState({ email: event.target.value })}
                         />
 
                         <Button
@@ -67,8 +75,10 @@ class ForgotPassword extends Component {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
+                            onClick={(event) => { event.preventDefault(); console.log(this.state) }
+                            }
                         >
-                            Send Reset Password Link
+                            Send Recovery Link
           </Button>
 
                     </form>
