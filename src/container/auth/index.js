@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -40,9 +40,26 @@ const styles = theme => ({
 });
 
 class SignIn extends Component {
+  constructor(props) {
+    super(props)
+    this.state={
+      password:"",
+      email:""
+    }
+  }
+  setUserPassword = (event) => {
+    this.setState({ password: event.target.value })
+  }
+  setUserEmail = (event) => {
+    this.setState({ email: event.target.value })
+  }
+  onSubmit=(event)=>{
+    console.log("event====>",this.state)
+    event.preventDefault();
+  }
   render() {
-   let {classes}=this.props;
-
+    let { classes } = this.props;
+    let {email,password}=this.state;
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -64,6 +81,8 @@ class SignIn extends Component {
               name="email"
               autoComplete="email"
               autoFocus
+              value={email}
+              onChange={this.setUserEmail}
             />
             <TextField
               variant="outlined"
@@ -75,6 +94,8 @@ class SignIn extends Component {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={this.setUserPassword}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -86,6 +107,7 @@ class SignIn extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onSubmit={this.onSubmit}
             >
               Sign In
           </Button>
