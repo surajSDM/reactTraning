@@ -5,17 +5,17 @@ import { createBrowserHistory } from "history";
 import SignIn from "../container/auth";
 import SignUp from "../container/auth/SignUp";
 import ForgotPassword from "../container/auth/ForgotPassword";
+import { Provider } from "mobx-react";
+import Stores from "../store";
 function Routes() {
     return (
-        <Router history={createBrowserHistory()}>
-            <div>
-                {/* <Header /> */}
-
+        <Provider stores={Stores}>
+            <Router history={createBrowserHistory()}>
                 <Route exact path="/" component={SignIn} />
                 <Route path="/signUp" component={SignUp} />
                 <Route path="/ForgotPassword" component={ForgotPassword} />
-            </div>
-        </Router>
+            </Router>
+        </Provider>
     );
 }
 

@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { inject, observer } from "mobx-react";
-@inject("stores");
 const styles = theme => ({
   '@global': {
     body: {
@@ -38,6 +37,8 @@ const styles = theme => ({
     margin: 3,
   },
 });
+
+@inject("stores")
 @observer
 class SignIn extends Component {
   constructor(props) {

@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
-
+import { inject, observer } from "mobx-react";
 
 const styles = () => ({
   '@global': {
@@ -39,6 +39,8 @@ const styles = () => ({
 });
 
 
+@inject("stores")
+@observer
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -48,15 +50,26 @@ class SignUp extends Component {
       email: "",
       password: "",
       rePassword: "",
-      checkBox: ""
+      checkBox: "",
+      phone: ""
     }
   }
   componentDidMount() {
 
   }
+
+  registerUser = (event) => {
+    let {
+      stores: { UserStore },
+    } = this.props;
+    const { firstName, lastName, email, password, phone } = this.state;
+    UserStore.registerUser({ username: email, email, firstName, lastName, password, phone_number: phone })
+    event.preventDefault();
+  }
+
   render() {
     const { classes } = this.props;
-    let { email, firstName, lastName, password, rePassword, checkBox } = this.state;
+    let { email, firstName, lastName, password, rePassword, checkBox, phone } = this.state;
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -94,6 +107,19 @@ class SignUp extends Component {
                   autoComplete="lname"
                   value={lastName}
                   onChange={(event) => this.setState({ lastName: event.target.value })}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="phone"
+                  label="Phone Number"
+                  name="phoneNumber"
+                  autoComplete="phone"
+                  value={phone}
+                  onChange={(event) => this.setState({ phone: event.target.value })}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -149,7 +175,7 @@ class SignUp extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={(event) => { event.preventDefault(); console.log(this.state) }}
+              onClick={this.registerUser}
             >
               Sign Up
           </Button>
