@@ -12,8 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-
+import { inject, observer } from "mobx-react";
+@inject("stores");
 const styles = theme => ({
   '@global': {
     body: {
@@ -38,7 +38,7 @@ const styles = theme => ({
     margin: 3,
   },
 });
-
+@observer
 class SignIn extends Component {
   constructor(props) {
     super(props)
@@ -107,10 +107,10 @@ class SignIn extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onSubmit={this.onSubmit}
+              onClick={this.onSubmit}
             >
               Sign In
-          </Button>
+          </Button> 
             <Grid container>
               <Grid item xs>
                 <Link href="/ForgotPassword" variant="body2">
