@@ -11,8 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
-import { inject, observer } from "mobx-react";
-
+import { observer } from "mobx-react"
 const styles = () => ({
   '@global': {
     body: {
@@ -38,9 +37,6 @@ const styles = () => ({
   },
 });
 
-
-@inject("stores")
-@observer
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -193,4 +189,4 @@ class SignUp extends Component {
   }
 }
 
-export default withStyles(styles)(SignUp)
+export default withStyles(styles)(observer(SignUp))
